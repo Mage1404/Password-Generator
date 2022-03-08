@@ -8,16 +8,19 @@ var password_lower = "abcdefghijklmnopqrstuwxyz";
 var password_special = " !\"#$%&'()*+,-./:;<=>?@[/]^_`{|}~";
 
 var password_generator = function () {
+  //reset password length everytime click on button
   password_length = 0;
   password_length = window.prompt('Please choose a length of at least 8 characters and no more than 128 characters');
   if (password_length >= 8 && password_length <= 128) {
     type_select();
   } else {
-    window.alert("Please enter an valid password length");
+    // do nothing if password length is not valid
+    window.alert("Please enter a valid password length");
   }
 }
 
 var type_select = function () {
+  //reset result and password list everytime click on button
   password_result = "";
   password_list = "";
   var password_temp_length = password_length;
@@ -45,6 +48,7 @@ var type_select = function () {
     password_list += password_special;
     password_temp_length -= 1; 
   }
+  //in case if none of the password type is selected
   if (password_temp_length === password_length) {
     window.alert("please select at least one character type for your password");
     type_select();
@@ -53,6 +57,7 @@ var type_select = function () {
       password_result += password_list.charAt(Math.floor(Math.random() * password_list.length));
     }
   }
+  //using random_string function to shuffle the password result
   password_result = random_string(password_result);
   document.getElementById("password").value = password_result;
   return;
